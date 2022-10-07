@@ -1,5 +1,6 @@
 //este codigo puede hacer hablar tu pc
-let texto = "Este texto se sintetizara por el navegador, pinga, clase talla";
+let texto =
+  "Java Script es un lenguaje genial, por primera vez logro hacer hablar mi pc";
 
 const hablar = (texto) =>
   speechSynthesis.speak(new SpeechSynthesisUtterance(texto));
