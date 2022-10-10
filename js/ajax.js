@@ -12,7 +12,7 @@
       console.log(json);
       console.log("Exito de coneccion");
     } else {
-      console.log("Error");
+      console.log("Error de coneccion");
     }
 
     //programacion
