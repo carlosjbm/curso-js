@@ -1,3 +1,4 @@
+//AJAX XMLHttpRequest
 (() => {
   //paso1..Crear una variable para instanciar el objeto XMLHttpRequest
   const xhr = new XMLHttpRequest(),
@@ -17,7 +18,7 @@
 
       json.forEach((el) => {
         const $li = document.createElement("li");
-        $li.innerHTML = `${el.name}---${el.email}--${el.phone}`;
+        $li.innerHTML = `${el.name}--- (${el.email})--- ${el.phone}`;
         $fragment.appendChild($li);
       });
 
@@ -30,8 +31,38 @@
   });
 
   //paso3..Abrir el evento
-  xhr.open("GET", "http://jsonplaceholder.typicode.com/user");
+  xhr.open("GET", "http://jsonplaceholder.typicode.com/users");
 
   //paso4..Enviar la peticion
   xhr.send();
+})();
+
+//AJAX API Fetch
+(() => {
+  const $fetch = document.getElementById("fetch"),
+    $err = document.getElementById("err"),
+    $fragment = document.createDocumentFragment();
+  fetch("http://jsonplaceholder.typicode.com/users")
+    //Validacion del servidor
+    .then((res) => (res.ok ? res.json() : Promise.reject(res)))
+    .then((json) => {
+      console.log(json);
+
+      json.forEach((el) => {
+        const $li = document.createElement("li");
+        $li.innerHTML = `${el.name}--- (${el.email})--- ${el.phone}`;
+        $fragment.appendChild($li);
+      });
+
+      $fetch.appendChild($fragment);
+    })
+    //Caso de error
+    .catch((err) => {
+      console.log(err);
+      let message = err.statusText || "Ocurrio un error";
+      $err.innerHTML = `Error ${err.status} ${message}`;
+    })
+    .finally(() => {
+      console.log("Este texto siempre va a mostrarse");
+    });
 })();
